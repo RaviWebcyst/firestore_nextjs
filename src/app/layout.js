@@ -9,6 +9,8 @@ import { Provider } from 'react-redux';
 import store from '../../store/store';
 
 import { Geist, Geist_Mono } from "next/font/google";
+
+import "./style.css";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,30 +29,31 @@ const geistMono = Geist_Mono({
 // };
 
 const  RootLayout = ({ children }) => {
+
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`} data-typography="poppins" data-theme-version="light" data-layout="vertical" data-nav-headerbg="color_1" data-headerbg="color_1" data-sidebar-style="full" data-sidebarbg="color_1" data-sidebar-position="fixed" data-header-position="fixed" data-container="wide" direction="ltr" data-primary="color_1" data-sidebartext="color_1">
+      <body className={`${geistSans.variable} ${geistMono.variable}`} data-typography="poppins" data-theme-version="light" data-layout="vertical" data-nav-headerbg="color_1" data-headerbg="color_1" data-sidebar-style="full" data-sidebarbg="color_1" data-sidebar-position="fixed" data-header-position="fixed" data-container="wide"  data-primary="color_1" data-sidebartext="color_1">
         
         <Provider store={store}>
           {children}
           </Provider>
 
-        <script src="https://ventic.dexignzone.com/xhtml/vendor/global/global.min.js"></script>
-        <script src="https://ventic.dexignzone.com/xhtml/vendor/chartjs/chart.bundle.min.js"></script>
-        <script src="https://ventic.dexignzone.com/xhtml/vendor/bootstrap-datetimepicker/js/moment.js"></script>
-        <script src="https://ventic.dexignzone.com/xhtml/vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-        <script src="https://ventic.dexignzone.com/xhtml/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+        <script src="./js/global.min.js"></script>
+        <script src="./js/chart.bundle.min.js"></script>
+        {/* <script src="./js/moment.js"></script> */}
+        {/* <script src="./js/bootstrap-datetimepicker.min.js"></script> */}
+        <script src="./js/bootstrap-select.min.js"></script>
         
-       <script src="https://ventic.dexignzone.com/xhtml/vendor/peity/jquery.peity.min.js"></script>
+       <script src="./js/jquery.peity.min.js"></script>
 	
-	    <script src="https://ventic.dexignzone.com/xhtml/vendor/apexchart/apexchart.js"></script>
+       <script src="./js/apexchart.js"></script>
+
+	    <script src="./js/dashboard-1.js"></script>
 	
-	    <script src="https://ventic.dexignzone.com/xhtml/js/dashboard/dashboard-1.js"></script>
-	
-      <script src="https://ventic.dexignzone.com/xhtml/js/custom.min.js"></script>
-      <script src="https://ventic.dexignzone.com/xhtml/js/deznav-init.js"></script>
-      <script src="https://ventic.dexignzone.com/xhtml/js/demo.js"></script>
-      <script src="https://ventic.dexignzone.com/xhtml/js/styleSwitcher.js"></script>
+      <script src="./js/custom.min.js"></script>
+      <script src="./js/deznav-init.js"></script>
+      {/* <script src="./js/demo.js"></script> */}
+      {/* <script src="./js/styleSwitcher.js"></script> */}
       </body>
     </html>
   );

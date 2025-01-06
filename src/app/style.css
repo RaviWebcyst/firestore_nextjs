@@ -1,16 +1,16 @@
-
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700");
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700");
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,600,700");
-@import url("./all.min.css");
-@import url("./materialdesignicons.min.css");
+/* @import url("./all.min.css");  */
+/* @import url("./materialdesignicons.min.css");
 @import url("./themify-icons.css");
 @import url("./line-awesome.min.css");
 @import url("./flaticon.css");
-@import url("./flaticon_1.css");
+@import url("./flaticon_1.css"); */
 @import url("./metisMenu.min.css");
+
 :root {
   --primary: #0E8A74;
   --secondary: #FB3E7A;
@@ -634,14 +634,7 @@ legend {
   -webkit-appearance: textfield;
   outline-offset: -2px; }
 
-/* rtl:raw:
-[type="tel"],
-[type="url"],
-[type="email"],
-[type="number"] {
-  direction: ltr;
-}
-*/
+
 ::-webkit-search-decoration {
   -webkit-appearance: none; }
 
@@ -24363,7 +24356,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 .photo-content {
   position: relative; }
   .photo-content .cover-photo {
-    background: url(../images/profile/cover.jpg);
+    background: url(/images/profile/cover.jpg);
     background-size: cover;
     background-position: center;
     min-height: 250px;
@@ -26344,7 +26337,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    background: url(../images/svg/cd-arrow.svg) no-repeat 0 0; }
+    background: url(/images/svg/cd-arrow.svg) no-repeat 0 0; }
   .cd-h-timeline__navigation:hover {
     border-color: #68CF29; }
 
@@ -30870,7 +30863,7 @@ table.dataTable thead > tr > th.sorting::before {
         padding: 30px 0px; } }
 
 .welcome-content {
-  background: url("./../images/1.jpg");
+  background: url("/images/1.jpg");
   background-size: cover;
   background-position: center;
   height: 100%;
@@ -32679,7 +32672,7 @@ span#counter {
   .bg-image-2:after {
     position: absolute;
     content: "";
-    background-image: url(../images/pattern/icTicket.png);
+    background-image: url(/images/pattern/icTicket.png);
     height: 150px;
     width: 100%;
     background-repeat: no-repeat;
@@ -32931,7 +32924,7 @@ span#counter {
     top: 15px;
     height: 24px;
     width: 16px;
-    background-image: url(../images/dots.png);
+    background-image: url(/images/dots.png);
     background-repeat: no-repeat;
     opacity: 1; }
   .plus-box:after {
@@ -32941,7 +32934,7 @@ span#counter {
     bottom: 40px;
     height: 26px;
     width: 20px;
-    background-image: url(../images/dots2.png);
+    background-image: url(/images/dots2.png);
     background-repeat: no-repeat;
     opacity: 1; }
 

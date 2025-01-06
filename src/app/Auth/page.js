@@ -26,6 +26,7 @@ export default  function Auth() {
 
 
   useEffect(() => {
+
     if (isLoggedIn) {
       router.push('/');
     }
@@ -35,7 +36,7 @@ export default  function Auth() {
   const handleSubmit = async (e) => {
     e.stopPropagation();
     e.preventDefault();
-    await axios.post('https://firestore-nextjs.vercel.app/api/auth',state).then((res) => {
+    await axios.post(`api/auth`,state).then((res) => {
         console.log("res");
         console.log(res);
       if (res.status === 200) {

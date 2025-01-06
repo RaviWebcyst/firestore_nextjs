@@ -1,8 +1,11 @@
+.sidebar-right
+{
+  display: none !important;
+}
 
-@import url("https://ventic.w3itexpert.com/ventic/css/style.css");
-
-
-
+.dz-demo-panel {
+  display: none;
+}
 
 .authincation {
   position: relative;
