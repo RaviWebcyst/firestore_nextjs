@@ -11,6 +11,13 @@
 @import url("./flaticon_1.css"); */
 @import url("./metisMenu.min.css");
 
+@import url("https://ventic.dexignzone.com/xhtml/icons/fontawesome/css/all.min.css"); 
+@import url("https://ventic.dexignzone.com/xhtml/icons/material-design-iconic-font/css/materialdesignicons.min.css"); 
+@import url("https://ventic.dexignzone.com/xhtml/icons/themify-icons/css/themify-icons.css"); 
+@import url("https://ventic.dexignzone.com/xhtml/icons/line-awesome/css/line-awesome.min.css"); 
+@import url("https://ventic.dexignzone.com/xhtml/icons/floaticon/flaticon.css");
+@import url("https://ventic.dexignzone.com/xhtml/icons/floaticon_1/flaticon_1.css"); 
+
 :root {
   --primary: #0E8A74;
   --secondary: #FB3E7A;
@@ -23925,31 +23932,31 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   position: relative;
   top: 0.125rem; }
 
-[data-theme-version="dark"] #external-events [data-class="bg-primary"] {
+[data-theme-version="dark"] #external-events [data-className="bg-primary"] {
   color: #fff !important; }
 
-#external-events [data-class="bg-primary"]::before {
+#external-events [data-className="bg-primary"]::before {
   background: var(--primary); }
 
-#external-events [data-class="bg-success"]::before {
+#external-events [data-className="bg-success"]::before {
   background: #68CF29; }
 
-#external-events [data-class="bg-warning"]::before {
+#external-events [data-className="bg-warning"]::before {
   background: #FE634E; }
 
-#external-events [data-class="bg-dark"]::before {
+#external-events [data-className="bg-dark"]::before {
   background: #6e6e6e; }
 
-#external-events [data-class="bg-danger"]::before {
+#external-events [data-className="bg-danger"]::before {
   background: #f72b50; }
 
-#external-events [data-class="bg-info"]::before {
+#external-events [data-className="bg-info"]::before {
   background: #3A82EF; }
 
-#external-events [data-class="bg-pink"]::before {
+#external-events [data-className="bg-pink"]::before {
   background: #e83e8c; }
 
-#external-events [data-class="bg-secondary"]::before {
+#external-events [data-className="bg-secondary"]::before {
   background: #FB3E7A; }
 
 .fc .fc-row .fc-content-skeleton table,

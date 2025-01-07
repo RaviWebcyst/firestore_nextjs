@@ -22,6 +22,8 @@ export default  function Auth() {
     // rememberMe: false,
   });
 
+  const [disable,setDisable] = useState(false);
+
 
 
 
@@ -36,6 +38,7 @@ export default  function Auth() {
   const handleSubmit = async (e) => {
     e.stopPropagation();
     e.preventDefault();
+    setDisable(true);
     await axios.post(`api/auth`,state).then((res) => {
         console.log("res");
         console.log(res);
@@ -52,7 +55,9 @@ export default  function Auth() {
       console.log("err");
       console.log(err.response.data.message);
       setMesssage(err.response.data.message);
-  });
+  }).finally(
+    setDisable(false)
+  );
   };
   
 
@@ -105,7 +110,11 @@ export default  function Auth() {
                                         </div> */}
                                     </div>
                                     <div className="text-center">
-                                        <button type="submit" className="btn btn-primary btn-block">Sign Me In</button>
+                                        <button type="submit" className="btn btn-primary btn-block" >Sign Me In
+                                          {disable && (
+                                          <span className="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
+                                          )}
+                                        </button>
                                     </div>
                                 </form>
                              
