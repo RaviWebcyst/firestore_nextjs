@@ -47,7 +47,7 @@ export default function Home() {
 										</svg>
 									</span>
 									<div className="media-body">
-										<p className="mb-1">Today's Attendence</p>
+										<p className="mb-1">Today Attendence</p>
 										<h4 className="mb-0">0</h4>
 									</div>
 								</div>
