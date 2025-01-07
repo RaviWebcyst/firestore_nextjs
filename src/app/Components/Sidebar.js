@@ -1,3 +1,7 @@
+
+"use client";
+
+import React from "react";
 import { MdDashboard } from "react-icons/md";
 import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
 import Link from "next/link";
