@@ -8,6 +8,7 @@ import React from "react";
 import { Header } from "../Components/Header";
 import { Sidebar } from "../Components/Sidebar";
 import { Footer } from "../Components/Footer";
+import Link from "next/link";
 
 
 
@@ -41,7 +42,7 @@ export default function Attendence() {
                 <div className="filter cm-content-box box-primary">
                         <div className="mb-5">
                             <ul className="text-end">
-                                <li><a href="" className="btn btn-primary ">Add Attendence</a></li>
+                                <li><Link href="Attendence/Add" className="btn btn-primary ">Add Attendence</Link></li>
                             </ul>
                         </div>
                     </div>
