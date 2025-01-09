@@ -9,11 +9,34 @@ import { Header } from "../Components/Header";
 import { Sidebar } from "../Components/Sidebar";
 import { Footer } from "../Components/Footer";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 
 
 
 export default function Attendence() {
+
+    const [attendenceList, setAttendenceList] = useState([]);
+
+
+    async function fetchAttendence() {
+        try {
+            const response = await axios.get('/api/attendence');
+            console.log(response);
+            
+            // const data = await response.json();
+            // console.log(data);
+            
+            setAttendenceList(response.data);
+        } catch (error) {
+            console.error('Error fetching attendence data:', error);
+        }
+    }
+
+    useEffect(() => {
+        fetchAttendence();
+    }, []);
 
 //   const isLoggedIn = useSelector((state) => state?.auth?.isLoggedIn);
 //   const router = useRouter();
@@ -61,16 +84,33 @@ export default function Attendence() {
 														<label className="form-check-label" ></label>
 													</div>
 												</th>
-                                                <th>Roll No</th>
+                                                <th>#</th>
                                                 <th>Name</th>
-                                                <th>Email</th>
+                                                <th>Hours</th>
+                                                <th>Type</th>
                                                 <th>Date</th>
-                                                <th>Status</th>
 												<th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
+                                            {attendenceList.map((attendence, index) => (
+                                                <tr key={index}>
+                                                    <td>
+                                                        <div className="form-check custom-checkbox checkbox-primary check-lg me-3">
+                                                            <label className="form-check-label"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>{index + 1}</td>
+                                                    <td>{attendence.name}</td>
+                                                    <td>{attendence.hours}</td>
+                                                    <td>{attendence.type}</td>
+                                                    <td>{new Date(attendence.timestamp.seconds * 1000).toLocaleString()}</td>
+                                                    <td className="d-flex gap-3">
+                                                        <Link href={`/Attendence/Edit/${attendence.id}`} className="btn btn-primary">Edit</Link>
+                                                        <button className="btn btn-danger">Delete</button>
+                                                    </td>
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </table>
                                 </div>
