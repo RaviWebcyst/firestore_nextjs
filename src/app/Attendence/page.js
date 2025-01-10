@@ -5,7 +5,7 @@ import React from "react";
 // import { useEffect } from "react";
 // import { useRouter } from "next/navigation";
 // import { useSelector } from "react-redux";
-import { Header } from "../Components/Header";
+import  Header  from "../Components/Header";
 import { Sidebar } from "../Components/Sidebar";
 import { Footer } from "../Components/Footer";
 import Link from "next/link";

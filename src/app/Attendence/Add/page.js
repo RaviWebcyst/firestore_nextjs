@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { Header } from "@/app/Components/Header";
+import  Header  from "@/app/Components/Header";
 import { Sidebar } from "@/app/Components/Sidebar";
 import axios from "axios";
 import { useState } from "react";
