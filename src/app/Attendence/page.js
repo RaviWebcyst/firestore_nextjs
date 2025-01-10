@@ -34,6 +34,19 @@ export default function Attendence() {
         }
     }
 
+     const handleDeleteAttendence = async(id) => {
+
+        
+        try {
+            await axios.delete(`/api/attendence?id=${id}`);
+            setAttendenceList(attendenceList.filter(attendence => attendence.id !== id));
+        } catch (error) {
+            console.error('Error deleting attendence:', error);
+        }
+    }
+
+
+
     useEffect(() => {
         fetchAttendence();
     }, []);
@@ -107,7 +120,8 @@ export default function Attendence() {
                                                     <td>{new Date(attendence.timestamp.seconds * 1000).toLocaleString()}</td>
                                                     <td className="d-flex gap-3">
                                                         <Link href={`/Attendence/Edit/${attendence.id}`} className="btn btn-primary">Edit</Link>
-                                                        <button className="btn btn-danger">Delete</button>
+                                                        
+                                                        <button className="btn btn-danger" onClick={()=>handleDeleteAttendence(attendence.id)}>Delete</button>
                                                     </td>
                                                 </tr>
                                             ))}

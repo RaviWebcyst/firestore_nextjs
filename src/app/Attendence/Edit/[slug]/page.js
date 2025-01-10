@@ -61,7 +61,7 @@ export default function Edit(data) {
       };
 
       const fetchAttendence = async () => {
-        var id = data.params.slug
+        var id = data.params.slug;
         try {
           const response = await axios.get(`/api/attendence?id=${id}`);
           

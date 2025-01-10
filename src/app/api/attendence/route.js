@@ -1,6 +1,6 @@
 "use server";
 
-import { collection, addDoc,getDocs,query, doc, getDoc } from "firebase/firestore";
+import { collection, addDoc,getDocs,query, doc, getDoc, deleteDoc } from "firebase/firestore";
 
 import { db } from '../../../../firestore';
 
@@ -64,6 +64,25 @@ export async function GET(req) {
     }
 }
 
+
+export async function DELETE(req) {
+    try {
+        const url = new URL(req.url); // Get the URL object from the request
+        const id = url.searchParams.get('id'); // Extract the `id` from query parameters
+
+        if (!id) {
+            return new Response(JSON.stringify({ message: "ID is required" }), { status: 400 });
+        }
+
+        const docRef = doc(db, 'attendence', id);
+        await deleteDoc(docRef);
+
+        return new Response(JSON.stringify({ message: "Document deleted successfully" }), { status: 200 });
+    } catch (err) {
+        console.error("Error deleting document: ", err);
+        return new Response(JSON.stringify({ err }), { status: 500 });
+    }
+}
 
 
 
