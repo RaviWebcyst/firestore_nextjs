@@ -23,9 +23,21 @@ export default function Home() {
   //   }
   // }, [isLoggedIn]);
 
+  const toggleMenu = () => {
+    // $("#main-wrapper").toggleClass("menu-toggle");
+    
+    const header = document.getElementById('main-wrapper');
+    if (header.classList.contains('menu-toggle')) {
+      console.log(header.classList);
+        header.classList.remove('menu-toggle');
+      } else {
+        header.classList.add('menu-toggle');
+      }
+  };
+
   return (
     <div className={'show'} id="main-wrapper">
-      <Header />
+      <Header onClick={toggleMenu} />
       <Sidebar />
       <div className=" content-body default-height">
         <div className="container-fluid">

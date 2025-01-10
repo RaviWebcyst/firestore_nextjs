@@ -60,18 +60,18 @@ export default function Edit(data) {
         setState({ ...state, state: e.target.value });
       };
 
-      const fetchAttendence = async () => {
-        var id = data.params.slug;
-        try {
-          const response = await axios.get(`/api/attendence?id=${id}`);
+      // const fetchAttendence = async () => {
+      //   var id = data.params.slug;
+      //   try {
+      //     const response = await axios.get(`/api/attendence?id=${id}`);
           
-          if (response.status === 200) {
-            setState(response.data);
-          }
-        } catch (error) {
-          console.error("Error fetching attendence:", error);
-        }
-      };
+      //     if (response.status === 200) {
+      //       setState(response.data);
+      //     }
+      //   } catch (error) {
+      //     console.error("Error fetching attendence:", error);
+      //   }
+      // };
 
 
       const handleSubmit = async (e) => {
@@ -108,12 +108,24 @@ export default function Edit(data) {
 
 
       useEffect(()=>{
-        fetchAttendence();
+        // fetchAttendence();
       },[])
 
+      const toggleMenu = () => {
+        // $("#main-wrapper").toggleClass("menu-toggle");
+        const header = document.getElementById('main-wrapper');
+        if (header.classList.contains('menu-toggle')) {
+          console.log(header.classList);
+            header.classList.remove('menu-toggle');
+          } else {
+            header.classList.add('menu-toggle');
+          }
+       
+      };
+
   return (
-    <>
-      <Header />
+    <div className={`show`} id="main-wrapper">
+      <Header onClick={toggleMenu} />
       <Sidebar />
       <div className=" content-body default-height">
         <div className="container-fluid">
@@ -158,7 +170,6 @@ export default function Edit(data) {
                         <div className="mb-3 col-md-4">
                           <label className="form-label">Select Type</label>
                           <select className="form-control form-select"  onChange={handleTypeChange}>
-                            <option value="" selected disabled> Select Type</option>
                             <option value="naamcharcha">Naam Charcha</option>
                             <option value="block_naamcharcha">Block Naam Charcha</option>
                             <option value="sewa">Sewa</option>
@@ -203,6 +214,6 @@ export default function Edit(data) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };

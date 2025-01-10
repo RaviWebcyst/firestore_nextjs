@@ -13,7 +13,22 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 
+const toggleMenu = () => {
+    // $("#main-wrapper").toggleClass("menu-toggle");
+    
+    // const header = document.querySelector('show');
+    // if (header) {
+    //   header.classList.toggle('menu-toggle');
+    // }
 
+    const header = document.getElementById("main-wrapper");
+        // header.classList.toggle('menu-toggle');
+        if (header.classList.contains('menu-toggle')) {
+            header.classList.remove('menu-toggle');
+          } else {
+            header.classList.add('menu-toggle');
+          }
+  };
 
 export default function Attendence() {
 
@@ -62,7 +77,7 @@ export default function Attendence() {
 
   return (
     <div className={'show'} id="main-wrapper">
-      <Header />
+      <Header onClick={toggleMenu} />
       <Sidebar />
       <div className=" content-body default-height">
         <div className="container-fluid">

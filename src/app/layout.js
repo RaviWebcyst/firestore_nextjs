@@ -38,20 +38,20 @@ const  RootLayout = ({ children }) => {
           {children}
           </Provider>
 
-        <script src="./js/global.min.js"></script>
-        <script src="./js/chart.bundle.min.js"></script>
+        <script src="/js/global.min.js"></script>
+        <script src="/js/chart.bundle.min.js"></script>
         {/* <script src="./js/moment.js"></script> */}
         {/* <script src="./js/bootstrap-datetimepicker.min.js"></script> */}
-        <script src="./js/bootstrap-select.min.js"></script>
+        <script src="/js/bootstrap-select.min.js"></script>
         
-       <script src="./js/jquery.peity.min.js"></script>
+       <script src="/js/jquery.peity.min.js"></script>
 	
-       <script src="./js/apexchart.js"></script>
+       <script src="/js/apexchart.js"></script>
 
-	    <script src="./js/dashboard-1.js"></script>
+	    <script src="/js/dashboard-1.js"></script>
 	
-      <script src="./js/custom.min.js"></script>
-      <script src="./js/deznav-init.js"></script>
+      <script src="/js/custom.min.js"></script>
+      <script src="/js/deznav-init.js"></script>
       {/* <script src="./js/demo.js"></script> */}
       {/* <script src="./js/styleSwitcher.js"></script> */}
       </body>

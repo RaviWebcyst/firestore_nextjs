@@ -89,9 +89,28 @@ export default function Add() {
       );
       };
 
+      const toggleMenu = () => {
+        
+        // $("#main-wrapper").toggleClass("menu-toggle");
+        
+        // const header = document.querySelector('show');
+        // if (header) {
+        //   header.classList.toggle('menu-toggle');
+        // }
+    
+        const header = document.getElementById("main-wrapper");
+            // header.classList.toggle('menu-toggle');
+            if (header.classList.contains('menu-toggle')) {
+              console.log(header.classList);
+                header.classList.remove('menu-toggle');
+              } else {
+                header.classList.add('menu-toggle');
+              }
+      };
+
   return (
-    <>
-      <Header />
+    <div className={`show`} id="main-wrapper">
+      <Header onClick={toggleMenu} />
       <Sidebar />
       <div className=" content-body default-height">
         <div className="container-fluid">
@@ -136,7 +155,6 @@ export default function Add() {
                         <div className="mb-3 col-md-4">
                           <label className="form-label">Select Type</label>
                           <select className="form-control form-select"  onChange={handleTypeChange}>
-                            <option value="" selected disabled> Select Type</option>
                             <option value="naamcharcha">Naam Charcha</option>
                             <option value="block_naamcharcha">Block Naam Charcha</option>
                             <option value="sewa">Sewa</option>
@@ -181,6 +199,6 @@ export default function Add() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
