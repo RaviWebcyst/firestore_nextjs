@@ -6,6 +6,7 @@ import  Header  from "@/app/Components/Header";
 import { Sidebar } from "@/app/Components/Sidebar";
 import axios from "axios";
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function Add() {
     const [state,setState]= useState({
@@ -15,13 +16,15 @@ export default function Add() {
         type:null,
         location:null,
         hours:null,
-        block:null,
-        city:null,
-        dist:null,
-        state:null,
+        block:"Azamwala",
+        city:"Nihal Khera",
+        dist:"Fazilka",
+        state:"Punjab",
     });
 
     const [disable,setDisable] = useState(false);
+
+    const router = useRouter();
    
 
     const handleNameChange = (e) => {
@@ -66,6 +69,8 @@ export default function Add() {
             console.log(res);
           if (res.status === 200) {
             console.log(res.data);
+
+            router.push("/Attendence");
             setState({
                 name: null,
                 father_name: null,
@@ -130,7 +135,6 @@ export default function Add() {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="John"
                             onChange={handleNameChange}
                           />
                         </div>
@@ -139,7 +143,6 @@ export default function Add() {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Father Name/Husband Name"
                             onChange={handleFatherNameChange}
                           />
                         </div>
@@ -148,7 +151,6 @@ export default function Add() {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Phone No."
                             onChange={handlePhoneChange}
                           />
                         </div>
@@ -164,27 +166,27 @@ export default function Add() {
                         </div>
                         <div className="mb-3 col-md-4">
                           <label>Event Location</label>
-                          <input type="text" className="form-control" placeholder="Enter Event Location"  onChange={handleLocationChange} />
+                          <input type="text" className="form-control"  onChange={handleLocationChange} />
                         </div>
                         <div className="mb-3 col-md-4">
                           <label>Event Hours</label>
-                          <input type="text" className="form-control" placeholder="Enter Event Hours"  onChange={handleHoursChange} />
+                          <input type="text" className="form-control"   onChange={handleHoursChange} />
                         </div>
                         <div className="mb-3 col-md-4">
                           <label>Block</label>
-                          <input type="text" className="form-control" placeholder="Enter Block"  onChange={handleBlockChange} />
+                          <input type="text" className="form-control"  onChange={handleBlockChange}  value={state.block || ""} />
                         </div>
                         <div className="mb-3 col-md-4">
                           <label>Village/City</label>
-                          <input type="text" className="form-control" placeholder="Enter City"  onChange={handleCityChange} />
+                          <input type="text" className="form-control"  onChange={handleCityChange}  value={state.city || ""} />
                         </div>
                         <div className="mb-3 col-md-4">
                           <label>Dist.</label>
-                          <input type="text" className="form-control" placeholder="Enter District"   onChange={handleDistChange}/>
+                          <input type="text" className="form-control"    onChange={handleDistChange}  value={state.dist || ""}/>
                         </div>
                         <div className="mb-3 col-md-4">
                           <label>State</label>
-                          <input type="text" className="form-control" placeholder="Enter State"  onChange={handleStateChange} />
+                          <input type="text" className="form-control"   onChange={handleStateChange}  value={state.state || ""} />
                         </div>
                       </div>
                     

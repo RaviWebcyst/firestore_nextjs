@@ -5,9 +5,15 @@ import React, { useEffect } from 'react';
 import  Header  from "@/app/Components/Header";
 import { Sidebar } from "@/app/Components/Sidebar";
 import axios from "axios";
-import { useState } from "react";
+import { useState,use } from "react";
+import PropTypes from "prop-types";
+import { useRouter } from 'next/navigation';
 
-export default function Edit() {
+
+
+export default function Edit({params}) {
+  const router = useRouter();
+
     const [state,setState]= useState({
         name:null,
         father_name:null,
@@ -20,13 +26,14 @@ export default function Edit() {
         dist:null,
         state:null,
     });
-
     const [disable,setDisable] = useState(false);
 
    
+    useEffect(()=>{
+      fetchAttendence();
+    },[])
+
     
-   
-   
 
     const handleNameChange = (e) => {
         setState({ ...state, name: e.target.value });
@@ -60,42 +67,52 @@ export default function Edit() {
         setState({ ...state, state: e.target.value });
       };
 
-      // const fetchAttendence = async () => {
-      //   var id = data.params.slug;
-      //   try {
-      //     const response = await axios.get(`/api/attendence?id=${id}`);
-          
-      //     if (response.status === 200) {
-      //       setState(response.data);
-      //     }
-      //   } catch (error) {
-      //     console.error("Error fetching attendence:", error);
-      //   }
-      // };
+
+    
+
+      const {slug}=  use(params);
+
+      const fetchAttendence = async () => {
+        
+        if(slug){
+          var id = slug;
+          try {
+            const response = await axios.get(`/api/attendence?id=${id}`);
+              console.log(response);
+              
+            if (response.status === 200) {
+              
+              // setState(response.data);
+              setState({
+                name: response.data.name,
+                father_name: response.data.father_name,
+                phone: response.data.phone,
+                type: response.data.type,
+                location: response.data.location,
+                hours: response.data.hours,
+                block: response.data.block,
+                city: response.data.city,
+                dist: response.data.dist,
+                state: response.data.state,
+            });
+            }
+          } catch (error) {
+            console.error("Error fetching attendence:", error);
+          }
+        }
+      };
 
 
       const handleSubmit = async (e) => {
         e.stopPropagation();
         e.preventDefault();
         setDisable(true);
-        await axios.post(`/api/attendence`,state).then((res) => {
+        await axios.put(`/api/attendence?id=${slug}`,state).then((res) => {
             console.log("res");
             console.log(res);
           if (res.status === 200) {
             console.log(res.data);
-            setState({
-                name: null,
-                father_name: null,
-                phone: null,
-                type: null,
-                location: null,
-                hours: null,
-                block: state.block,
-                city: state.city,
-                dist: state.dist,
-                state: state.state,
-            });
-
+            router.push("/Attendence");
           }
         }).catch((err) => {
           console.log("err");
@@ -107,10 +124,7 @@ export default function Edit() {
       };
 
 
-      useEffect(()=>{
-        // fetchAttendence();
-      },[])
-
+    
       const toggleMenu = () => {
         // $("#main-wrapper").toggleClass("menu-toggle");
         const header = document.getElementById('main-wrapper');
@@ -146,6 +160,7 @@ export default function Edit() {
                             type="text"
                             className="form-control"
                             placeholder="John"
+                            value={state.name || ""}
                             onChange={handleNameChange}
                           />
                         </div>
@@ -156,6 +171,7 @@ export default function Edit() {
                             className="form-control"
                             placeholder="Father Name/Husband Name"
                             onChange={handleFatherNameChange}
+                            value={state.father_name || ""}
                           />
                         </div>
                         <div className="mb-3 col-md-4">
@@ -165,46 +181,47 @@ export default function Edit() {
                             className="form-control"
                             placeholder="Phone No."
                             onChange={handlePhoneChange}
+                            value={state.phone || ""}
                           />
                         </div>
                         <div className="mb-3 col-md-4">
                           <label className="form-label">Select Type</label>
-                          <select className="form-control form-select"  onChange={handleTypeChange}>
-                            <option value="naamcharcha">Naam Charcha</option>
-                            <option value="block_naamcharcha">Block Naam Charcha</option>
-                            <option value="sewa">Sewa</option>
-                            <option value="meditation">Meditation</option>
-                            <option value="satsang">Satsang</option>
+                          <select className="form-control form-select"  onChange={handleTypeChange} value={state.type || ""}>
+                            <option value="naamcharcha" >Naam Charcha</option>
+                            <option value="block_naamcharcha" >Block Naam Charcha</option>
+                            <option value="sewa" >Sewa</option>
+                            <option value="meditation" >Meditation</option>
+                            <option value="satsang" >Satsang</option>
                           </select>
                         </div>
                         <div className="mb-3 col-md-4">
                           <label>Event Location</label>
-                          <input type="text" className="form-control" placeholder="Enter Event Location"  onChange={handleLocationChange} />
+                          <input type="text" className="form-control" placeholder="Enter Event Location"  onChange={handleLocationChange}   value={state.location || ""} />
                         </div>
                         <div className="mb-3 col-md-4">
                           <label>Event Hours</label>
-                          <input type="text" className="form-control" placeholder="Enter Event Hours"  onChange={handleHoursChange} />
+                          <input type="text" className="form-control" placeholder="Enter Event Hours"  onChange={handleHoursChange}  value={state.hours || ""}/>
                         </div>
                         <div className="mb-3 col-md-4">
                           <label>Block</label>
-                          <input type="text" className="form-control" placeholder="Enter Block"  onChange={handleBlockChange} />
+                          <input type="text" className="form-control" placeholder="Enter Block"  onChange={handleBlockChange}  value={state.block || ""} />
                         </div>
                         <div className="mb-3 col-md-4">
                           <label>Village/City</label>
-                          <input type="text" className="form-control" placeholder="Enter City"  onChange={handleCityChange} />
+                          <input type="text" className="form-control" placeholder="Enter City"  onChange={handleCityChange}  value={state.city || ""} />
                         </div>
                         <div className="mb-3 col-md-4">
                           <label>Dist.</label>
-                          <input type="text" className="form-control" placeholder="Enter District"   onChange={handleDistChange}/>
+                          <input type="text" className="form-control" placeholder="Enter District"   onChange={handleDistChange}  value={state.dist || ""}/>
                         </div>
                         <div className="mb-3 col-md-4">
                           <label>State</label>
-                          <input type="text" className="form-control" placeholder="Enter State"  onChange={handleStateChange} />
+                          <input type="text" className="form-control" placeholder="Enter State"  onChange={handleStateChange}  value={state.state || ""} />
                         </div>
                       </div>
                     
                       <button type="submit" className="btn btn-primary" disabled={disable}>
-                        Submit
+                        Update
                       </button>
                     </form>
                   </div>
@@ -216,4 +233,10 @@ export default function Edit() {
       </div>
     </div>
   );
+};
+
+Edit.propTypes = {
+  params: PropTypes.shape({
+    slug: PropTypes.string.isRequired, // If `slug` is required
+  }).isRequired, // If `params` is required
 };

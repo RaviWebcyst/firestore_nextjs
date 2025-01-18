@@ -50,14 +50,14 @@ export default function Attendence() {
     }
 
      const handleDeleteAttendence = async(id) => {
-
-        
-        try {
-            await axios.delete(`/api/attendence?id=${id}`);
-            setAttendenceList(attendenceList.filter(attendence => attendence.id !== id));
-        } catch (error) {
-            console.error('Error deleting attendence:', error);
-        }
+        if(confirm('Are you sure want to delete')){
+            try {
+                await axios.delete(`/api/attendence?id=${id}`);
+                setAttendenceList(attendenceList.filter(attendence => attendence.id !== id));
+            } catch (error) {
+                console.error('Error deleting attendence:', error);
+            }
+    }
     }
 
 

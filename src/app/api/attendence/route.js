@@ -1,6 +1,6 @@
 "use server";
 
-import { collection, addDoc,getDocs,query, doc, getDoc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc,getDocs,query, doc, getDoc, deleteDoc, updateDoc } from "firebase/firestore";
 
 import { db } from '../../../../firestore';
 
@@ -65,6 +65,40 @@ export async function GET(req) {
 }
 
 
+export async function PUT (req){
+        const url = new URL(req.url); // Get the URL object from the request
+        const id = url.searchParams.get('id'); // Extract the `id` from query parameters
+        const docRefs = doc(db, 'attendence', id);
+
+    try{
+        
+        const { name, father_name, phone,type,location,hours,block,city,dist,state} = await req.json();
+
+         await updateDoc(docRefs, {
+            name,
+            father_name,
+            phone,
+            type,
+            location,
+            hours,
+            block,
+            city,
+            dist,
+            state,
+            timestamp: new Date()
+        });
+
+        return Response.json({ message: "Data Updated successfully" }, { status: 200 });
+
+
+    }
+    catch(err){
+        console.error("Error updating data: ", err);
+        return Response.json({ err },{status:500});
+    }
+}
+
+
 export async function DELETE(req) {
     try {
         const url = new URL(req.url); // Get the URL object from the request
@@ -83,6 +117,9 @@ export async function DELETE(req) {
         return new Response(JSON.stringify({ err }), { status: 500 });
     }
 }
+
+
+
 
 
 

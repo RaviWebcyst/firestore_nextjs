@@ -17,7 +17,6 @@ export async function POST(req) {
         if (querySnapshot.empty) {
             return Response.json({ message: "User not found" },{status:500});
         }
-        
 
           let user = null;
           querySnapshot.forEach((doc) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // import { useEffect } from "react";
 // import { useRouter } from "next/navigation";
@@ -8,12 +8,17 @@ import React from "react";
 import  Header  from "./Components/Header";
 import { Sidebar } from "./Components/Sidebar";
 import { Footer } from "./Components/Footer";
+import axios from "axios";
 
 
 
 
 export default function Home() {
 
+
+  const [state,setState] = useState({
+    total_meditation:0,today_meditation:0,this_month_meditation:0
+  })
   // const isLoggedIn = useSelector((state) => state?.auth?.isLoggedIn);
   // const router = useRouter();
 
@@ -35,6 +40,20 @@ export default function Home() {
       }
   };
 
+  async function fetchData(){
+    var res = await axios.get(`/api/dashboard`);
+    if(res.status== 200){
+      setState({
+        total_meditation:res.data.total_meditation,today_meditation:res.data.today_meditation,this_month_meditation:res.data.this_month_meditation
+      });
+    }
+    
+  }
+
+  useEffect(()=>{
+    fetchData();
+  },[]);
+
   return (
     <div className={'show'} id="main-wrapper">
       <Header onClick={toggleMenu} />
@@ -48,19 +67,65 @@ export default function Home() {
             </div>
            </div>
            <div className="row">
-           <div className="col-md-3">
+           <div className="col-md-4">
 						<div className="widget-stat card">
 							<div className="card-body p-4">
 								<div className="media ai-icon">
 									<span className="me-3 bgl-primary text-primary">
-										<svg id="icon-customers" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-user">
-											<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-											<circle cx="12" cy="7" r="4"></circle>
+                  <svg id="icon-orders" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-file-text">
+											<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+											<polyline points="14 2 14 8 20 8"></polyline>
+											<line x1="16" y1="13" x2="8" y2="13"></line>
+											<line x1="16" y1="17" x2="8" y2="17"></line>
+											<polyline points="10 9 9 9 8 9"></polyline>
 										</svg>
 									</span>
 									<div className="media-body">
-										<p className="mb-1">Today Attendence</p>
-										<h4 className="mb-0">0</h4>
+										<p className="mb-1">Today Meditation</p>
+										<h4 className="mb-0">{state.today_meditation || 0} Hrs</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+          </div>
+           <div className="col-md-4">
+						<div className="widget-stat card">
+							<div className="card-body p-4">
+								<div className="media ai-icon">
+									<span className="me-3 bgl-primary text-primary">
+                  <svg id="icon-orders" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-file-text">
+											<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+											<polyline points="14 2 14 8 20 8"></polyline>
+											<line x1="16" y1="13" x2="8" y2="13"></line>
+											<line x1="16" y1="17" x2="8" y2="17"></line>
+											<polyline points="10 9 9 9 8 9"></polyline>
+										</svg>
+									</span>
+									<div className="media-body">
+										<p className="mb-1"> This Month Meditation</p>
+										<h4 className="mb-0">{state.this_month_meditation || 0} Hrs</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+          </div>
+
+          <div className="col-md-4">
+						<div className="widget-stat card">
+							<div className="card-body p-4">
+								<div className="media ai-icon">
+									<span className="me-3 bgl-primary text-primary">
+                  <svg id="icon-orders" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-file-text">
+											<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+											<polyline points="14 2 14 8 20 8"></polyline>
+											<line x1="16" y1="13" x2="8" y2="13"></line>
+											<line x1="16" y1="17" x2="8" y2="17"></line>
+											<polyline points="10 9 9 9 8 9"></polyline>
+										</svg>
+									</span>
+									<div className="media-body">
+										<p className="mb-1"> Total Meditation</p>
+										<h4 className="mb-0">{state.total_meditation || 0} Hrs</h4>
 									</div>
 								</div>
 							</div>
