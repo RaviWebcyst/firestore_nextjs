@@ -65,8 +65,7 @@ export async function GET(req) {
 
         var q = query(attendenceRef);
 
-        if(name != null && father_name != null && date != null){
-
+        if(date != null){
             var current_date  = new Date(date);
             current_date.setHours(0,0,0,0);
             var last_date = new Date(date);
@@ -74,7 +73,11 @@ export async function GET(req) {
         
             var startOfDay = Timestamp.fromDate(current_date);
             var endOfDay = Timestamp.fromDate(last_date);
-            
+        }
+        
+
+        if(name != null && father_name != null && date != null){
+
              q = query(attendenceRef,
                 where("name", "==", name),
                 where("father_name", "==", father_name),
@@ -98,20 +101,7 @@ export async function GET(req) {
                 where("father_name", "==", father_name),
               );
         }
-        else if(name != null && father_name != null){
-             q = query(attendenceRef,
-                where("name", "==", name),
-                where("father_name", "==", father_name)
-              );
-        }
         else if(date != null){
-            var current_date  = new Date(date);
-            current_date.setHours(0,0,0,0);
-            var last_date = new Date(date);
-            last_date.setHours(23, 59, 59, 999);
-        
-            var startOfDay = Timestamp.fromDate(current_date);
-            var endOfDay = Timestamp.fromDate(last_date);
         
             q = query(
                 attendenceRef,
