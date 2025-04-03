@@ -5,12 +5,16 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../../store/auth/action";
 import PropTypes from "prop-types";
+import { selectUser } from "../../../store/auth/userSlice";
 
 
  const Header = ({onClick}) => {  
     const router = useRouter();
     const dispatch = useDispatch();
 
+    const user = useSelector(selectUser);
+    
+    
     const logout = () => {  
         dispatch(logoutUser());
         router.push('/Auth');
@@ -54,7 +58,7 @@ return (
                             <li className="nav-item dropdown header-profile">
                                 <a className="nav-link" href="#" role="button" data-bs-toggle="dropdown">
 									<div className="header-info me-3">
-										<span className="fs-16 font-w600 ">James P. Sullivan</span>
+										<span className="fs-16 font-w600 ">{user?.name}</span>
 										<small className="text-end fs-14 font-w400">Super Admin</small>
 									</div>
                                     <img src="/logo.svg" width="20" alt="" />

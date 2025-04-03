@@ -1,6 +1,6 @@
 "use server";
 
-import { collection, addDoc,getDocs,query, doc, getDoc, deleteDoc, updateDoc, where } from "firebase/firestore";
+import { collection, addDoc,getDocs,query, doc, getDoc, deleteDoc, updateDoc, where, Timestamp } from "firebase/firestore";
 
 import { db } from '../../../../firestore';
 
@@ -52,7 +52,7 @@ export async function GET(req) {
 
         const name = url.searchParams.get('name'); 
         const father_name = url.searchParams.get('father_name'); 
-        // const date = url.searchParams.get('date'); 
+        var date = url.searchParams.get('date'); 
 
        
 
@@ -61,16 +61,67 @@ export async function GET(req) {
         
         // var total = await getSum("attendence","hours","meditation");
         
-        const attendenceRef = collection(db, 'attendence');
+        var attendenceRef = collection(db, 'attendence');
 
         var q = query(attendenceRef);
 
-        if(name != null && father_name != null){
+        if(name != null && father_name != null && date != null){
+
+            var current_date  = new Date(date);
+            current_date.setHours(0,0,0,0);
+            var last_date = new Date(date);
+            last_date.setHours(23, 59, 59, 999);
+        
+            var startOfDay = Timestamp.fromDate(current_date);
+            var endOfDay = Timestamp.fromDate(last_date);
+            
+             q = query(attendenceRef,
+                where("name", "==", name),
+                where("father_name", "==", father_name),
+                where("timestamp", ">=", startOfDay),
+                where("timestamp", "<=", endOfDay)
+              );
+        }
+        else if(name != null && father_name != null){
              q = query(attendenceRef,
                 where("name", "==", name),
                 where("father_name", "==", father_name)
               );
         }
+        else if(name != null){
+             q = query(attendenceRef,
+                where("name", "==", name),
+              );
+        }
+        else if(father_name != null){
+             q = query(attendenceRef,
+                where("father_name", "==", father_name),
+              );
+        }
+        else if(name != null && father_name != null){
+             q = query(attendenceRef,
+                where("name", "==", name),
+                where("father_name", "==", father_name)
+              );
+        }
+        else if(date != null){
+            var current_date  = new Date(date);
+            current_date.setHours(0,0,0,0);
+            var last_date = new Date(date);
+            last_date.setHours(23, 59, 59, 999);
+        
+            var startOfDay = Timestamp.fromDate(current_date);
+            var endOfDay = Timestamp.fromDate(last_date);
+        
+            q = query(
+                attendenceRef,
+                where("timestamp", ">=", startOfDay),
+                where("timestamp", "<=", endOfDay)
+            );
+
+        }
+        
+
 
         const snapshot = await getDocs(q);
         

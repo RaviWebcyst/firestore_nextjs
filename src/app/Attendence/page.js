@@ -38,12 +38,16 @@ export default function Attendence() {
       const [state,setState]= useState({
             name:null,
             father_name:null,
-            date:new Date(),
+            date:null,
         });
     
 
 
     async function fetchAttendence() {
+
+        console.log("date");
+        console.log(state.date);
+        
         try {
             const response = await axios.get('/api/attendence',{
                 params:{
@@ -79,7 +83,7 @@ export default function Attendence() {
         setState({
             name:null,
             father_name:null,
-            date:new Date(),
+            date:null,
         })
 
         await fetchAttendence();
@@ -101,7 +105,8 @@ export default function Attendence() {
         setState({ ...state, father_name: e.target.value });
       };
       const handleDateChange = (e) => {
-        setState({ ...state, date: e.target.value });
+        const dateString = e.target.value;
+        setState({ ...state, date: dateString });
       };
 
 //   const isLoggedIn = useSelector((state) => state?.auth?.isLoggedIn);
@@ -169,7 +174,7 @@ export default function Attendence() {
 											<input type="text" className="form-control mb-3" id="exampleFormControlInput1" placeholder="Father Name/Husband Name" onChange={handleFatherNameChange} />
 										</div>
 										<div className="col-xl-3 col-sm-6">
-											 <input className="form-control  mb-3" type="date" onChange={handleDateChange}  />
+											 <input className="form-control  mb-3" type="date" onChange={handleDateChange} name="date"   value={state?.date} />
 										</div>
 										<div className="col-xl-3 col-sm-6 ">
 											<button className="btn btn-primary me-2" title="Click here to Search" type="button" onClick={fetchAttendence}>Search</button>

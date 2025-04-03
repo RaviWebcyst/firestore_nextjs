@@ -23,7 +23,7 @@ export const authSlice = createSlice({
         restoreAuthState: (state, action) => {
             state.isLoggedIn = true;
             state.user = action.payload;
-        }
+        },
     }
 });
 

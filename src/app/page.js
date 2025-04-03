@@ -9,11 +9,17 @@ import  Header  from "./Components/Header";
 import { Sidebar } from "./Components/Sidebar";
 import { Footer } from "./Components/Footer";
 import axios from "axios";
+import { getCookie } from "cookies-next";
+import { setUser } from "../../store/auth/userSlice";
+import { useDispatch } from "react-redux";
 
 
 
 
 export default function Home() {
+
+
+  const dispatch = useDispatch();
 
 
   const [state,setState] = useState({
@@ -41,12 +47,21 @@ export default function Home() {
   };
 
   async function fetchData(){
-    var res = await axios.get(`/api/dashboard`);
+    const token = getCookie('token');
+   
+    
+
+    var res = await axios.get(`/api/dashboard`,{params:{token:token}});
     if(res.status== 200){
       setState({
         total_meditation:res.data.total_meditation,today_meditation:res.data.today_meditation,this_month_meditation:res.data.this_month_meditation
       });
-    }
+
+
+        if(res.data?.user_details){
+          dispatch(setUser(res.data?.user_details));
+        }
+     }
     
   }
 

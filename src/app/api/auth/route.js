@@ -23,9 +23,6 @@ export async function POST(req) {
             user = { id: doc.id, ...doc.data() };
           });
 
-          console.log("user");
-          console.log(user.pwd);
-          
 
           const isPasswordValid = await bcrypt.compare(password, user.pwd);
             if (!isPasswordValid) {
